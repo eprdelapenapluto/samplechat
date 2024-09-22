@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 
 export default function Home() {
   const [currentSocket, setSocket] = useState<any>(undefined);
-  const [inbox, setInbox] = useState<any>(["hello", "nice"])
+  const [inbox, setInbox] = useState<any>(["hello", "map"])
   const [message, setMessage] = useState("");
   const [roomName, setRoomName] = useState("");
 
@@ -17,14 +17,12 @@ export default function Home() {
   useEffect(() => {
     const socket = io("http://localhost:3000"); 
     socket.on("message", (message) => {
-      let result = [...inbox];
-      result.push(message);
-      setInbox(result);
+      setInbox([...inbox, message]);
     })
     //1. they must have the same port with your server port
     //2. establish connection with the socket io server running on localhost 3000
     setSocket(socket);
-  }, [])
+  }, [inbox])
   return (
     <>
       <div>
