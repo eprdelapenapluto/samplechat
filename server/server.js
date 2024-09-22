@@ -1,6 +1,8 @@
+const { connectDB } = require("./db/connectdb");
+
 const io = require("socket.io")(3000, {
     cors: {
-        origin: "http://localhost:3001", methods: [
+        origin: "*", methods: [
         "GET",
         "POST", 
         ]
